@@ -39,7 +39,12 @@ build/Release
 
 # Dependency directories
 node_modules/
+/.pnp
+.pnp.js
 jspm_packages/
+
+# testing
+/coverage
 
 # TypeScript v1 declaration files
 typings/

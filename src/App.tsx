@@ -19,6 +19,8 @@ function App() {
           Learn React
         </a>
       </header>
+      <label htmlFor="annualSalary">Annual Salary</label>
+      <input id="annualSalary" />
     </div>
   );
 }

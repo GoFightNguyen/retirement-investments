@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  const [annualSalary, setAnnualSalary] = useState(0);
+
+  const updateAnnualSalary = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAnnualSalary(Number(event.target.value));
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,7 +26,12 @@ function App() {
         </a>
       </header>
       <label htmlFor="annualSalary">Annual Salary</label>
-      <input id="annualSalary" />
+      <input
+        id="annualSalary"
+        value={annualSalary}
+        onChange={updateAnnualSalary}
+      />
+      <label id="moniestoInvest">{annualSalary * 0.15}</label>
     </div>
   );
 }

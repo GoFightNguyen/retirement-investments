@@ -1,16 +1,11 @@
-import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import LabeledCurrencyControl from "./LabeledCurrencyControl";
 
 function App() {
-  const [annualSalary, setAnnualSalary] = useState(0);
-
-  const updateAnnualSalary = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAnnualSalary(Number(event.target.value));
-  };
-
   return (
     <div className="App">
+      <LabeledCurrencyControl id="annualSalary" labelText='Annual Salary'/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -25,13 +20,6 @@ function App() {
           Learn React
         </a>
       </header>
-      <label htmlFor="annualSalary">Annual Salary</label>
-      <input
-        id="annualSalary"
-        value={annualSalary}
-        onChange={updateAnnualSalary}
-      />
-      <label id="moniestoInvest">{annualSalary * 0.15}</label>
     </div>
   );
 }

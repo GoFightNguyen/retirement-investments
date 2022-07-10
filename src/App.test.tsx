@@ -7,8 +7,8 @@ async function givenMyAnnualSalaryIs(salary: string) {
   const user = userEvent.setup();
   render(<App />);
   const salaryInput = screen.getByLabelText("Annual Salary");
+  await user.clear(salaryInput);
   await user.type(salaryInput, salary);
-  expect(salaryInput).toHaveValue(salary);
 }
 
 describe.each`

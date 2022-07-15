@@ -6,7 +6,11 @@ import userEvent from "@testing-library/user-event";
 describe("LabeledCurrencyControl", () => {
   test("should default to value $0.00", () => {
     render(
-      <LabeledCurrencyControl id="testCurrency" labelText="Test Currency" />
+      <LabeledCurrencyControl
+        id="testCurrency"
+        labelText="Test Currency"
+        onMoniesChange={() => {}}
+      />
     );
     const input = screen.getByLabelText("Test Currency");
     expect(input).toHaveValue("$0.00");
@@ -30,7 +34,11 @@ describe("LabeledCurrencyControl", () => {
     Then ${expected} is displayed`, async () => {
       const user = userEvent.setup();
       render(
-        <LabeledCurrencyControl id="testCurrency" labelText="Test Currency" />
+        <LabeledCurrencyControl
+          id="testCurrency"
+          labelText="Test Currency"
+          onMoniesChange={() => {}}
+        />
       );
       const input = screen.getByLabelText("Test Currency");
       await user.clear(input);

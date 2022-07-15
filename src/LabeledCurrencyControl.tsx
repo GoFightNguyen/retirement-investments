@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import NumberFormat from "react-number-format";
 
-const LabeledCurrencyControl = (props: { id: string; labelText: string }) => {
-  const [money, setMoney] = useState(0);
+/**
+ * A controlled component...
+ *
+ * @param props
+ * @returns
+ */
+const LabeledCurrencyControl = (props: {
+  id: string;
+  labelText: string;
+  onMoniesChange: (monies: number) => void;
+}) => {
   return (
     <>
       <label htmlFor={props.id}>{props.labelText}</label>
@@ -11,10 +20,10 @@ const LabeledCurrencyControl = (props: { id: string; labelText: string }) => {
         decimalScale={2}
         fixedDecimalScale
         prefix="$"
-        thousandSeparator=','
-        value={money}
-        onValueChange={values => {
-          setMoney(values.floatValue || 0)
+        thousandSeparator={true}
+        defaultValue={0}
+        onValueChange={(values) => {
+          props.onMoniesChange(values.floatValue || 0);
         }}
       />
     </>

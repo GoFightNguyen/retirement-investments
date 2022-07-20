@@ -2,16 +2,27 @@ import React from "react";
 import NumberFormat from "react-number-format";
 
 /**
- * A controlled component...
+ * Props for {@link LabeledCurrencyControl}
+ */
+export interface LabeledCurrencyControlProps {
+  /**
+   * The id attribute of the input as well as the for attribute of the label
+   */
+  id: string;
+  labelText: string;
+  /**
+   * The function to call when the money value is changed
+   */
+  onMoniesChange: (monies: number) => void;
+}
+
+/**
+ * A controlled component that includes a label and its labeled control.
  *
  * @param props
  * @returns
  */
-const LabeledCurrencyControl = (props: {
-  id: string;
-  labelText: string;
-  onMoniesChange: (monies: number) => void;
-}) => {
+const LabeledCurrencyControl = (props: LabeledCurrencyControlProps) => {
   return (
     <>
       <label htmlFor={props.id}>{props.labelText}</label>

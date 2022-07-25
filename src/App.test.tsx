@@ -3,14 +3,6 @@ import { render, screen, within } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
 
-async function givenMyAnnualSalaryIs(salary: string) {
-  const user = userEvent.setup();
-  render(<App />);
-  const salaryInput = screen.getByLabelText("Annual Salary");
-  await user.clear(salaryInput);
-  await user.type(salaryInput, salary);
-}
-
 describe.each`
   annualSalary    | moniesToInvest
   ${"$106,156"}   | ${"$15,923.40"}
@@ -23,6 +15,14 @@ describe.each`
     await thenMyInvestmentInRetirementShouldBe(moniesToInvest);
   });
 });
+
+async function givenMyAnnualSalaryIs(salary: string) {
+  const user = userEvent.setup();
+  render(<App />);
+  const salaryInput = screen.getByLabelText("Annual Salary");
+  await user.clear(salaryInput);
+  await user.type(salaryInput, salary);
+}
 
 async function thenMyInvestmentInRetirementShouldBe(moniesToInvest: string) {
   const moniesToInvestNode = screen.getByText(

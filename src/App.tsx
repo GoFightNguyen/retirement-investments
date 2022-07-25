@@ -1,5 +1,3 @@
-import logo from "./logo.svg";
-import "./App.css";
 import LabeledCurrencyControl from "./LabeledCurrencyControl";
 import NumberFormat from "react-number-format";
 import { useState } from "react";
@@ -29,20 +27,6 @@ function App() {
           value={annualSalary * 0.15}
         />
       </span>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }

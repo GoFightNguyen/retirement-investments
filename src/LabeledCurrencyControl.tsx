@@ -1,4 +1,5 @@
 import React from "react";
+import TextField from "@mui/material/TextField";
 import NumberFormat from "react-number-format";
 
 /**
@@ -24,20 +25,19 @@ export interface LabeledCurrencyControlProps {
  */
 const LabeledCurrencyControl = (props: LabeledCurrencyControlProps) => {
   return (
-    <>
-      <label htmlFor={props.id}>{props.labelText}</label>
-      <NumberFormat
-        id={props.id}
-        decimalScale={2}
-        fixedDecimalScale
-        prefix="$"
-        thousandSeparator={true}
-        defaultValue={0}
-        onValueChange={(values) => {
-          props.onMoniesChange(values.floatValue || 0);
-        }}
-      />
-    </>
+    <NumberFormat
+      customInput={TextField}
+      label={props.labelText}
+      id={props.id}
+      decimalScale={2}
+      fixedDecimalScale
+      prefix="$"
+      thousandSeparator={true}
+      defaultValue={0}
+      onValueChange={(values) => {
+        props.onMoniesChange(values.floatValue || 0);
+      }}
+    />
   );
 };
 

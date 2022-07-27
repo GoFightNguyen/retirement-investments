@@ -21,8 +21,9 @@ function App() {
           labelText="Annual Salary"
           onMoniesChange={(monies) => handleAnnualSalaryChange(monies)}
         />
-        <span>
-          monies to invest in retirement
+
+        <Typography variant="body1" gutterBottom>
+          monies to invest in retirement{" "}
           <NumberFormat
             displayType={"text"}
             decimalScale={2}
@@ -31,7 +32,7 @@ function App() {
             prefix={"$"}
             value={annualSalary * 0.15}
           />
-        </span>
+        </Typography>
       </Box>
     </Container>
   );

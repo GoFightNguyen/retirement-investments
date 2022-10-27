@@ -1,10 +1,16 @@
 import LabeledCurrencyControl from "./LabeledCurrencyControl";
 import NumberFormat from "react-number-format";
 import { useState } from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, IconButton, Typography } from "@mui/material";
+import AddInvestment from "./components/AddInvestment";
 
 function App() {
   const [annualSalary, setAnnualSalary] = useState(0);
+  const [addInvestment, setAddInvestment] = useState(false);
+
+  function handleAddInvestment() {
+    setAddInvestment(true);
+  }
 
   function handleAnnualSalaryChange(monies: number) {
     setAnnualSalary(monies);
@@ -34,6 +40,8 @@ function App() {
           />
         </Typography>
       </Box>
+      <IconButton onClick={() => handleAddInvestment()}>+</IconButton>
+      {addInvestment && <AddInvestment />}
     </Container>
   );
 }

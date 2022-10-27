@@ -57,8 +57,12 @@ async function whenAddingAnInvestment(investmentName: string, user: UserEvent) {
   await user.click(addInvestmentNode);
   const investmentNameInput = await screen.findByLabelText(/investment/i);
   await user.type(investmentNameInput, investmentName);
+  const submitButton = screen.getByRole("button", { name: /submit/i });
+  await user.click(submitButton);
 
-  expect(investmentNameInput).toHaveValue(investmentName);
+  await waitFor(() => {
+    expect(screen.getByText(investmentName)).toBeInTheDocument();
+  });
 }
 
 async function thenMyInvestmentInRetirementShouldBe(moniesToInvest: string) {

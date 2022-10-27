@@ -7,6 +7,7 @@ import AddInvestment from "./components/AddInvestment";
 function App() {
   const [annualSalary, setAnnualSalary] = useState(0);
   const [addInvestment, setAddInvestment] = useState(false);
+  const [investments, setInvestments] = useState(new Array<string>());
 
   function handleAddInvestment() {
     setAddInvestment(true);
@@ -14,6 +15,11 @@ function App() {
 
   function handleAnnualSalaryChange(monies: number) {
     setAnnualSalary(monies);
+  }
+
+  function handleInvestmentAdded(name: string) {
+    setAddInvestment(false);
+    setInvestments(investments.concat(name));
   }
 
   return (
@@ -40,8 +46,17 @@ function App() {
           />
         </Typography>
       </Box>
+      <ul>
+        {investments.map((i) => (
+          <li key={i}>{i}</li>
+        ))}
+      </ul>
       <IconButton onClick={() => handleAddInvestment()}>+</IconButton>
-      {addInvestment && <AddInvestment />}
+      {addInvestment && (
+        <AddInvestment
+          onInvestmentAdded={(name: string) => handleInvestmentAdded(name)}
+        />
+      )}
     </Container>
   );
 }

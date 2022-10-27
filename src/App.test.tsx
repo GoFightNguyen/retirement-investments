@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  getByTestId,
   render,
   screen,
   waitFor,

@@ -50,7 +50,7 @@ function App() {
             fixedDecimalScale
             thousandSeparator={true}
             prefix={"$"}
-            value={retirementOveriew.annualSalary * 0.15}
+            value={retirementOveriew.moniesToInvest}
           />
         </Typography>
       </Box>

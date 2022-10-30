@@ -13,15 +13,33 @@ describe("AddInvestment", () => {
       await user.type(nameInput, value);
     };
 
+    const percentageInput = screen.getByLabelText(/percentage/i);
+    const changePercentageInput = async (value: number) => {
+      await user.type(percentageInput, value.toString());
+    };
+
     const submitButton = screen.getByRole("button", { name: /submit/i });
     const submit = async () => await user.click(submitButton);
 
-    return { ...utils, nameInput, changeNameInput, submit, mockTrigger };
+    return {
+      ...utils,
+      nameInput,
+      changeNameInput,
+      percentageInput,
+      changePercentageInput,
+      submit,
+      mockTrigger,
+    };
   }
 
   test("name defaults to empty", () => {
     const utils = setup();
     expect(utils.nameInput).toHaveValue("");
+  });
+
+  test("percentage defaults to empty", () => {
+    const utils = setup();
+    expect(utils.percentageInput).toHaveValue("");
   });
 
   test(`Given the user inputs "ROTH 401(k)"
@@ -31,12 +49,21 @@ describe("AddInvestment", () => {
     expect(utils.nameInput).toHaveValue("ROTH 401(k)");
   });
 
+  test(`Given the user inputs a percentage of 10.4
+        Then 10.4 is displayed`, async () => {
+    const utils = setup();
+    await utils.changePercentageInput(10.4);
+    expect(utils.percentageInput).toHaveValue("10.4%");
+  });
+
   test(`Given the user inputs "ROTH 401(k)"
+        And inputs the Percentage to 10.4
         When the user submits
-        Then onInvestmentAdded is triggered with "ROTH 401(k)"`, async () => {
+        Then onInvestmentAdded is triggered with "ROTH 401(k)" and 10.4`, async () => {
     const utils = setup();
     await utils.changeNameInput("ROTH 401(k)");
+    await utils.changePercentageInput(10.4);
     await utils.submit();
-    expect(utils.mockTrigger).toHaveBeenCalledWith("ROTH 401(k)");
+    expect(utils.mockTrigger).toHaveBeenCalledWith("ROTH 401(k)", 10.4);
   });
 });

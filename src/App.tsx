@@ -7,7 +7,9 @@ import RetirementOverview from "./domain-model";
 
 function App() {
   const [addInvestment, setAddInvestment] = useState(false);
-  const [investments, setInvestments] = useState(new Array<string>());
+  const [investments, setInvestments] = useState(
+    new Array<{ name: string; percentage: number }>()
+  );
 
   const [retirementOveriew, setRetirementOverview] = useState(
     new RetirementOverview()
@@ -25,9 +27,9 @@ function App() {
     setRetirementOverview(copy);
   }
 
-  function handleInvestmentAdded(name: string) {
+  function handleInvestmentAdded(name: string, percentage: number) {
     setAddInvestment(false);
-    setInvestments(investments.concat(name));
+    setInvestments(investments.concat({ name, percentage }));
   }
 
   return (
@@ -56,13 +58,15 @@ function App() {
       </Box>
       <ul>
         {investments.map((i) => (
-          <li key={i}>{i}</li>
+          <li key={i.name}>{`${i.name} ${i.percentage}%`}</li>
         ))}
       </ul>
       <IconButton onClick={() => handleAddInvestment()}>+</IconButton>
       {addInvestment && (
         <AddInvestment
-          onInvestmentAdded={(name: string) => handleInvestmentAdded(name)}
+          onInvestmentAdded={(name: string, percentage: number) =>
+            handleInvestmentAdded(name, percentage)
+          }
         />
       )}
     </Container>

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  render,
-  screen,
-  waitFor,
-  within,
-} from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
 import { UserEvent } from "@testing-library/user-event/dist/types/setup";
@@ -30,10 +25,10 @@ When investing 10% into a ROTH 401(k)
 */
 describe("Percentage-based investment", () => {
   test(`Given my annual salary is $106,156
-        When adding an investment into a ROTH 401(k)`, async () => {
+        When adding an investment of 10% into a ROTH 401(k)`, async () => {
     const { user } = setup();
     await givenMyAnnualSalaryIs("$106,156", user);
-    await whenAddingAnInvestment("ROTH 401(k)", user);
+    await whenAddingAnInvestment("ROTH 401(k)", 10, user);
   });
 });
 
@@ -51,16 +46,25 @@ async function givenMyAnnualSalaryIs(salary: string, user: UserEvent) {
   await user.type(salaryInput, salary);
 }
 
-async function whenAddingAnInvestment(investmentName: string, user: UserEvent) {
+async function whenAddingAnInvestment(
+  investmentName: string,
+  percentage: number,
+  user: UserEvent
+) {
   const addInvestmentNode = screen.getByText("+");
   await user.click(addInvestmentNode);
   const investmentNameInput = await screen.findByLabelText(/investment/i);
   await user.type(investmentNameInput, investmentName);
+  const percentageInput = await screen.findByLabelText(/percentage/i);
+  await user.type(percentageInput, percentage.toString());
+
   const submitButton = screen.getByRole("button", { name: /submit/i });
   await user.click(submitButton);
 
   await waitFor(() => {
-    expect(screen.getByText(investmentName)).toBeInTheDocument();
+    expect(
+      screen.getByText(investmentName + " " + percentage + "%")
+    ).toBeInTheDocument();
   });
 }
 

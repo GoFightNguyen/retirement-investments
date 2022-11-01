@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { Investment } from "../domain-model";
 import AddInvestment from "./AddInvestment";
 
 describe("AddInvestment", () => {
@@ -64,6 +65,7 @@ describe("AddInvestment", () => {
     await utils.changeNameInput("ROTH 401(k)");
     await utils.changePercentageInput(10.4);
     await utils.submit();
-    expect(utils.mockTrigger).toHaveBeenCalledWith("ROTH 401(k)", 10.4);
+    const expected: Investment = { name: "ROTH 401(k)", percentage: 10.4 };
+    expect(utils.mockTrigger).toHaveBeenCalledWith(expected);
   });
 });

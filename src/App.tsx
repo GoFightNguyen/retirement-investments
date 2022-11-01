@@ -3,13 +3,11 @@ import NumberFormat from "react-number-format";
 import { useState } from "react";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import AddInvestment from "./components/AddInvestment";
-import RetirementOverview from "./domain-model";
+import RetirementOverview, { Investment } from "./domain-model";
 
 function App() {
   const [addInvestment, setAddInvestment] = useState(false);
-  const [investments, setInvestments] = useState(
-    new Array<{ name: string; percentage: number }>()
-  );
+  const [investments, setInvestments] = useState(new Array<Investment>());
 
   const [retirementOveriew, setRetirementOverview] = useState(
     new RetirementOverview()
@@ -27,9 +25,9 @@ function App() {
     setRetirementOverview(copy);
   }
 
-  function handleInvestmentAdded(name: string, percentage: number) {
+  function handleInvestmentAdded(investment: Investment) {
     setAddInvestment(false);
-    setInvestments(investments.concat({ name, percentage }));
+    setInvestments(investments.concat(investment));
   }
 
   return (
@@ -64,9 +62,7 @@ function App() {
       <IconButton onClick={() => handleAddInvestment()}>+</IconButton>
       {addInvestment && (
         <AddInvestment
-          onInvestmentAdded={(name: string, percentage: number) =>
-            handleInvestmentAdded(name, percentage)
-          }
+          onInvestmentAdded={(investment) => handleInvestmentAdded(investment)}
         />
       )}
     </Container>

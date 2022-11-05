@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
-import NumberFormat from "react-number-format";
 import { Investment } from "../domain-model";
+import LabeledPercentageControl from "./LabeledPercentageControl";
 
 /**
  * Props for {@link AddInvestment}
@@ -36,17 +36,7 @@ const AddInvestment = (props: AddInvestmentProps) => {
       >
         {name}
       </TextField>
-      {/* TODO: extract separate component and add tests*/}
-      <NumberFormat
-        customInput={TextField}
-        label="Percentage"
-        id="percerntage"
-        decimalScale={2}
-        suffix="%"
-        onValueChange={(values) => {
-          setPercentage(values.floatValue || 0);
-        }}
-      />
+      <LabeledPercentageControl onPercentageChange={setPercentage} />
       <Button type="submit">Submit</Button>
     </form>
   );

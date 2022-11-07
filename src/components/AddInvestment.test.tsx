@@ -65,7 +65,7 @@ describe("AddInvestment", () => {
     await utils.changeNameInput("ROTH 401(k)");
     await utils.changePercentageInput(10.4);
     await utils.submit();
-    const expected: Investment = { name: "ROTH 401(k)", percentage: 10.4 };
+    const expected = Investment.create("ROTH 401(k)", 10.4);
     expect(utils.mockTrigger).toHaveBeenCalledWith(expected);
   });
 });

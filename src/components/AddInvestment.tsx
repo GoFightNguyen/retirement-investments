@@ -24,7 +24,8 @@ const AddInvestment = (props: AddInvestmentProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    props.onInvestmentAdded({ name, percentage });
+    const investment = Investment.create(name, percentage);
+    props.onInvestmentAdded(investment);
   };
 
   return (

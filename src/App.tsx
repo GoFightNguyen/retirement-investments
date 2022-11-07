@@ -27,6 +27,7 @@ function App() {
 
   function handleInvestmentAdded(investment: Investment) {
     setAddInvestment(false);
+    // TODO: use the domain-model instead
     setInvestments(investments.concat(investment));
   }
 

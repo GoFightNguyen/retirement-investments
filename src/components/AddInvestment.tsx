@@ -24,6 +24,7 @@ const AddInvestment = (props: AddInvestmentProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // TODO: handle error
     const investment = Investment.create(name, percentage);
     props.onInvestmentAdded(investment);
   };

@@ -56,7 +56,7 @@ function App() {
       </Box>
       <ul>
         {investments.map((i) => (
-          <li key={i.name}>{`${i.name} ${i.percentage}%`}</li>
+          <li key={i.name}>{`${i.name} ${i.percent}%`}</li>
         ))}
       </ul>
       <IconButton onClick={() => handleAddInvestment()}>+</IconButton>

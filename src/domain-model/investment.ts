@@ -1,15 +1,15 @@
 export default class Investment {
   private constructor(
     private readonly _name: string,
-    private readonly _percentage: number
+    private readonly _percent: number
   ) {}
 
   public get name(): string {
     return this._name;
   }
 
-  public get percentage(): number {
-    return this._percentage;
+  public get percent(): number {
+    return this._percent;
   }
 
   /**

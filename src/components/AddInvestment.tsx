@@ -21,8 +21,7 @@ interface AddInvestmentProps {
 const AddInvestment = (props: AddInvestmentProps) => {
   const [name, setName] = useState("");
   const [percentage, setPercentage] = useState(0);
-  const [error, setError] = useState("");
-  const [nameError, setNameError] = useState("");
+  const [error, setError] = useState<{ type: string; message: string }>();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,16 +29,18 @@ const AddInvestment = (props: AddInvestmentProps) => {
       const investment = Investment.create(name, percentage);
       props.onInvestmentAdded(investment);
     } catch (err: any) {
-      if (err instanceof InvestmentNameError) setNameError(err.message);
-      else setError(err.message);
+      setError({
+        type: err instanceof InvestmentNameError ? "name" : "percent",
+        message: err.message,
+      });
     }
   };
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <TextField
-        error={nameError ? true : false}
-        helperText={nameError}
+        error={error?.type === "name"}
+        helperText={error?.type === "name" ? error.message : null}
         required
         label="Investment"
         onChange={(e) => setName(e.target.value)}
@@ -47,7 +48,7 @@ const AddInvestment = (props: AddInvestmentProps) => {
         {name}
       </TextField>
       <LabeledPercentageControl onPercentageChange={setPercentage} />
-      {error && <span>{error}</span>}
+      {error?.type !== "name" && <span>{error?.message}</span>}
       <Button type="submit">Submit</Button>
     </form>
   );

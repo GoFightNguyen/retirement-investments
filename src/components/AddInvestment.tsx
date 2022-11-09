@@ -21,12 +21,16 @@ interface AddInvestmentProps {
 const AddInvestment = (props: AddInvestmentProps) => {
   const [name, setName] = useState("");
   const [percentage, setPercentage] = useState(0);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: handle error
-    const investment = Investment.create(name, percentage);
-    props.onInvestmentAdded(investment);
+    try {
+      const investment = Investment.create(name, percentage);
+      props.onInvestmentAdded(investment);
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -39,6 +43,7 @@ const AddInvestment = (props: AddInvestmentProps) => {
         {name}
       </TextField>
       <LabeledPercentageControl onPercentageChange={setPercentage} />
+      {error && <span>{error}</span>}
       <Button type="submit">Submit</Button>
     </form>
   );

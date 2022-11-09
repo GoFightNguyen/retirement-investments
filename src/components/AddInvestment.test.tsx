@@ -68,4 +68,32 @@ describe("AddInvestment", () => {
     const expected = Investment.create("ROTH 401(k)", 10.4);
     expect(utils.mockTrigger).toHaveBeenCalledWith(expected);
   });
+
+  test(`Given the user inputs a valid name
+        But inputs an invalid percentage
+        When the user submits
+        Then an error about the percentage is displayed
+        And onInvestmentAdded is not triggered`, async () => {
+    const utils = setup();
+    await utils.changeNameInput("ROTH 401(k)");
+    await utils.changePercentageInput(101);
+    await utils.submit();
+    expect(utils.mockTrigger).not.toHaveBeenCalled();
+    expect(
+      screen.getByText(/percent must be between 0 and 100/i)
+    ).toBeInTheDocument();
+  });
+
+  test(`Given the user inputs a valid percentage
+        But inputs an invalid name
+        When the user submits
+        Then an error about the name is displayed
+        And onInvestmentAdded is not triggered`, async () => {
+    const utils = setup();
+    await utils.changeNameInput("   ");
+    await utils.changePercentageInput(101);
+    await utils.submit();
+    expect(utils.mockTrigger).not.toHaveBeenCalled();
+    expect(screen.getByText(/name is required/i)).toBeInTheDocument();
+  });
 });

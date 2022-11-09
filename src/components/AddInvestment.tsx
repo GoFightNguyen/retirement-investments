@@ -22,6 +22,7 @@ const AddInvestment = (props: AddInvestmentProps) => {
   const [name, setName] = useState("");
   const [percentage, setPercentage] = useState(0);
   const [error, setError] = useState("");
+  const [nameError, setNameError] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,13 +30,16 @@ const AddInvestment = (props: AddInvestmentProps) => {
       const investment = Investment.create(name, percentage);
       props.onInvestmentAdded(investment);
     } catch (err: any) {
-      setError(err.message);
+      if (err.message.includes("Name")) setNameError(err.message);
+      else setError(err.message);
     }
   };
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <TextField
+        error={nameError ? true : false}
+        helperText={nameError}
         required
         label="Investment"
         onChange={(e) => setName(e.target.value)}

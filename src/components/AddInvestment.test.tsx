@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Investment } from "../domain-model";
+import { Investment, InvestmentNameError } from "../domain-model";
 import AddInvestment from "./AddInvestment";
 
 describe("AddInvestment", () => {
@@ -93,7 +93,9 @@ describe("AddInvestment", () => {
     await utils.changeNameInput("   ");
     await utils.changePercentageInput(101);
     await utils.submit();
+
+    const expectedError = InvestmentNameError.create().message;
     expect(utils.mockTrigger).not.toHaveBeenCalled();
-    expect(screen.getByText(/name is required/i)).toBeInTheDocument();
+    expect(screen.getByText(expectedError)).toBeInTheDocument();
   });
 });

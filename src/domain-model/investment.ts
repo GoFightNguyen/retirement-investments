@@ -23,6 +23,15 @@ export default class Investment {
       if (percent !== null && percent >= 0 && percent <= 100) {
         return new Investment(name.trim(), percent);
       } else throw new Error("Percent must be between 0 and 100");
-    } else throw new Error("Name is required.");
+    } else throw InvestmentNameError.create();
+  }
+}
+
+export class InvestmentNameError extends Error {
+  public static create() {
+    return new InvestmentNameError();
+  }
+  private constructor() {
+    super("Name is required");
   }
 }

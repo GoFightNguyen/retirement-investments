@@ -1,5 +1,5 @@
 import RetirementOverview from "./retirementOverview";
-import Investment from "./investment";
+import Investment, { InvestmentNameError } from "./investment";
 
 export default RetirementOverview;
-export { Investment };
+export { Investment, InvestmentNameError };

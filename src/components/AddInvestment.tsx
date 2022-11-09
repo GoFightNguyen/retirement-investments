@@ -1,6 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { Investment } from "../domain-model";
+import { Investment, InvestmentNameError } from "../domain-model";
 import LabeledPercentageControl from "./LabeledPercentageControl";
 
 /**
@@ -30,7 +30,7 @@ const AddInvestment = (props: AddInvestmentProps) => {
       const investment = Investment.create(name, percentage);
       props.onInvestmentAdded(investment);
     } catch (err: any) {
-      if (err.message.includes("Name")) setNameError(err.message);
+      if (err instanceof InvestmentNameError) setNameError(err.message);
       else setError(err.message);
     }
   };

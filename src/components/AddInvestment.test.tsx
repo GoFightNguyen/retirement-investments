@@ -1,6 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Investment, InvestmentNameError } from "../domain-model";
+import {
+  Investment,
+  InvestmentNameError,
+  InvestmentPercentError,
+} from "../domain-model";
 import AddInvestment from "./AddInvestment";
 
 describe("AddInvestment", () => {
@@ -78,10 +82,10 @@ describe("AddInvestment", () => {
     await utils.changeNameInput("ROTH 401(k)");
     await utils.changePercentageInput(101);
     await utils.submit();
+
+    const expectedError = InvestmentPercentError.create().message;
     expect(utils.mockTrigger).not.toHaveBeenCalled();
-    expect(
-      screen.getByText(/percent must be between 0 and 100/i)
-    ).toBeInTheDocument();
+    expect(screen.getByText(expectedError)).toBeInTheDocument();
   });
 
   test(`Given the user inputs a valid percentage

@@ -9,6 +9,15 @@ export interface LabeledPercentageControlProps {
    * The function to call when the percentage value is changed
    */
   onPercentageChange: (percentage: number) => void;
+  /**
+   * The error, if any, to display.
+   * 
+   * @remarks
+   * 
+   * The union type includes `null` so that usage is similar
+   * to setting `helperText` on an input such as `TextField`
+   */
+  error?: string | null;
 }
 
 /**
@@ -17,9 +26,14 @@ export interface LabeledPercentageControlProps {
  * @returns
  */
 const LabeledPercentageControl = (props: LabeledPercentageControlProps) => {
+  const error = {
+    error: props.error ? true : false,
+    helperText: props.error ? props.error : null,
+  };
   return (
     <NumberFormat
       id="percentage"
+      {...error}
       customInput={TextField}
       label="Percentage"
       suffix="%"

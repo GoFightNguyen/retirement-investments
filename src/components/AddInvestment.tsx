@@ -47,8 +47,7 @@ const AddInvestment = (props: AddInvestmentProps) => {
       >
         {name}
       </TextField>
-      <LabeledPercentageControl onPercentageChange={setPercentage} />
-      {error?.type !== "name" && <span>{error?.message}</span>}
+      <LabeledPercentageControl error={error?.type === 'percent' ? error.message : null} onPercentageChange={setPercentage} />
       <Button type="submit">Submit</Button>
     </form>
   );

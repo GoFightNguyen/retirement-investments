@@ -9,7 +9,7 @@ function App() {
   const [addInvestment, setAddInvestment] = useState(false);
   const [investments, setInvestments] = useState(new Array<Investment>());
 
-  const [retirementOveriew, setRetirementOverview] = useState(
+  const [retirementOverview, setRetirementOverview] = useState(
     new RetirementOverview()
   );
 
@@ -19,7 +19,7 @@ function App() {
 
   function handleAnnualSalaryChange(monies: number) {
     const copy = new RetirementOverview();
-    Object.assign(copy, retirementOveriew);
+    Object.assign(copy, retirementOverview);
 
     copy.changeAnnualSalary(monies);
     setRetirementOverview(copy);
@@ -51,7 +51,7 @@ function App() {
             fixedDecimalScale
             thousandSeparator={true}
             prefix={"$"}
-            value={retirementOveriew.moniesToInvest}
+            value={retirementOverview.moniesToInvest}
           />
         </Typography>
       </Box>

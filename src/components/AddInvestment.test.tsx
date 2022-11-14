@@ -2,8 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {
   Investment,
-  InvestmentNameError,
-  InvestmentPercentError,
+  InvestmentError,
 } from "../domain-model";
 import AddInvestment from "./AddInvestment";
 
@@ -83,7 +82,7 @@ describe("AddInvestment", () => {
     await utils.changePercentageInput(101);
     await utils.submit();
 
-    const expectedError = InvestmentPercentError.create().message;
+    const expectedError = InvestmentError.createForPercent().message;
     expect(utils.mockTrigger).not.toHaveBeenCalled();
     expect(screen.getByText(expectedError)).toBeInTheDocument();
   });
@@ -98,7 +97,7 @@ describe("AddInvestment", () => {
     await utils.changePercentageInput(101);
     await utils.submit();
 
-    const expectedError = InvestmentNameError.create().message;
+    const expectedError = InvestmentError.createForName().message;
     expect(utils.mockTrigger).not.toHaveBeenCalled();
     expect(screen.getByText(expectedError)).toBeInTheDocument();
   });

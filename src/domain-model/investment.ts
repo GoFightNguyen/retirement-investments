@@ -22,25 +22,30 @@ export default class Investment {
     if (name && name.trim()) {
       if (percent !== null && percent >= 0 && percent <= 100) {
         return new Investment(name.trim(), percent);
-      } else throw InvestmentPercentError.create();
-    } else throw InvestmentNameError.create();
+      } else throw InvestmentError.createForPercent();
+    } else throw InvestmentError.createForName();
   }
 }
 
-export class InvestmentNameError extends Error {
-  private constructor() {
-    super("Name is required");
-  }
-  public static create() {
-    return new InvestmentNameError();
-  }
+export enum InvestmentErrorType {
+  Name = "NAME",
+  Percent = "PERCENT",
 }
 
-export class InvestmentPercentError extends Error {
-  private constructor() {
-    super("Percent must be between 0 and 100");
+export class InvestmentError extends Error {
+  private constructor(
+    public readonly type: InvestmentErrorType,
+    message: string
+  ) {
+    super(message);
   }
-  public static create() {
-    return new InvestmentPercentError();
-  }
+
+  public static createForName = () =>
+    new InvestmentError(InvestmentErrorType.Name, "Name is required");
+
+  public static createForPercent = () =>
+    new InvestmentError(
+      InvestmentErrorType.Percent,
+      "Percent must be between 0 and 100"
+    );
 }

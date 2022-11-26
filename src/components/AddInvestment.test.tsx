@@ -101,4 +101,21 @@ describe("AddInvestment", () => {
     expect(utils.mockTrigger).not.toHaveBeenCalled();
     expect(screen.getByText(expectedError)).toBeInTheDocument();
   });
+
+  test(`When the user submits
+        But onInvestmentAdded throws an InvestmentError
+        Then the error is displayed`, async () => {
+    const utils = setup();
+    const expectedError = InvestmentError.createForName();
+    utils.mockTrigger.mockImplementation(() => {
+      throw InvestmentError.createForName();
+    });
+
+    // use valid inputs to ensure that the trigger is actually fired
+    await utils.changeNameInput('valid');
+    await utils.changePercentageInput(10);
+    await utils.submit();
+
+    expect(screen.getByText(expectedError.message)).toBeInTheDocument();
+  });
 });

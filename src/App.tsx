@@ -7,8 +7,6 @@ import RetirementOverview, { Investment } from "./domain-model";
 
 function App() {
   const [addInvestment, setAddInvestment] = useState(false);
-  const [investments, setInvestments] = useState(new Array<Investment>());
-
   const [retirementOverview, setRetirementOverview] = useState(
     new RetirementOverview()
   );
@@ -26,9 +24,9 @@ function App() {
   }
 
   function handleInvestmentAdded(investment: Investment) {
+    // TODO: handle errors
+    retirementOverview.addInvestment(investment);
     setAddInvestment(false);
-    // TODO: use the domain-model instead
-    setInvestments(investments.concat(investment));
   }
 
   return (
@@ -56,7 +54,7 @@ function App() {
         </Typography>
       </Box>
       <ul>
-        {investments.map((i) => (
+        {retirementOverview.investments.map((i) => (
           <li key={i.name}>{`${i.name} ${i.percent}%`}</li>
         ))}
       </ul>

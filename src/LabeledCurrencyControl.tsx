@@ -1,6 +1,6 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 
 /**
  * Props for {@link LabeledCurrencyControl}
@@ -25,7 +25,7 @@ export interface LabeledCurrencyControlProps {
  */
 const LabeledCurrencyControl = (props: LabeledCurrencyControlProps) => {
   return (
-    <NumberFormat
+    <NumericFormat
       customInput={TextField}
       label={props.labelText}
       id={props.id}

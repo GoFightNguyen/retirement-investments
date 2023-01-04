@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 
 /**
  * Props for {@link LabeledPercentageControl}
@@ -31,7 +31,7 @@ const LabeledPercentageControl = (props: LabeledPercentageControlProps) => {
     helperText: props.error ? props.error : null,
   };
   return (
-    <NumberFormat
+    <NumericFormat
       id="percentage"
       {...error}
       customInput={TextField}

@@ -1,5 +1,5 @@
 import LabeledCurrencyControl from "./LabeledCurrencyControl";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 import { useState } from "react";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import AddInvestment from "./components/AddInvestment";
@@ -43,7 +43,7 @@ function App() {
 
         <Typography variant="body1" gutterBottom>
           monies to invest in retirement{" "}
-          <NumberFormat
+          <NumericFormat
             displayType={"text"}
             decimalScale={2}
             fixedDecimalScale

@@ -11,9 +11,9 @@ export interface LabeledPercentageControlProps {
   onPercentageChange: (percentage: number) => void;
   /**
    * The error, if any, to display.
-   * 
+   *
    * @remarks
-   * 
+   *
    * The union type includes `null` so that usage is similar
    * to setting `helperText` on an input such as `TextField`
    */

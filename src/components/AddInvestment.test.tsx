@@ -1,9 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import {
-  Investment,
-  InvestmentError,
-} from "../domain-model";
+import { Investment, InvestmentError } from "../domain-model";
 import AddInvestment from "./AddInvestment";
 
 describe("AddInvestment", () => {
@@ -112,7 +109,7 @@ describe("AddInvestment", () => {
     });
 
     // use valid inputs to ensure that the trigger is actually fired
-    await utils.changeNameInput('valid');
+    await utils.changeNameInput("valid");
     await utils.changePercentageInput(10);
     await utils.submit();
 

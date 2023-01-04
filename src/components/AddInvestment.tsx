@@ -1,6 +1,10 @@
 import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { Investment, InvestmentError, InvestmentErrorType } from "../domain-model";
+import {
+  Investment,
+  InvestmentError,
+  InvestmentErrorType,
+} from "../domain-model";
 import LabeledPercentageControl from "./LabeledPercentageControl";
 
 /**
@@ -30,7 +34,7 @@ const AddInvestment = (props: AddInvestmentProps) => {
       props.onInvestmentAdded(investment);
     } catch (err: any) {
       if (err instanceof InvestmentError) setError(err);
-      else throw err;  // not yet sure what I want to do if the error is not an InvestmentError
+      else throw err; // not yet sure what I want to do if the error is not an InvestmentError
     }
   };
 
@@ -38,7 +42,9 @@ const AddInvestment = (props: AddInvestmentProps) => {
     <form onSubmit={(e) => handleSubmit(e)}>
       <TextField
         error={error?.type === InvestmentErrorType.Name}
-        helperText={error?.type === InvestmentErrorType.Name ? error.message : null}
+        helperText={
+          error?.type === InvestmentErrorType.Name ? error.message : null
+        }
         required
         label="Investment"
         onChange={(e) => setName(e.target.value)}
@@ -46,8 +52,11 @@ const AddInvestment = (props: AddInvestmentProps) => {
         {name}
       </TextField>
       <LabeledPercentageControl
-        error={error?.type === InvestmentErrorType.Percent ? error.message : null}
-        onPercentageChange={setPercentage} />
+        error={
+          error?.type === InvestmentErrorType.Percent ? error.message : null
+        }
+        onPercentageChange={setPercentage}
+      />
       <Button type="submit">Submit</Button>
     </form>
   );

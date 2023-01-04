@@ -4,16 +4,21 @@ import LabeledPercentageControl from "./LabeledPercentageControl";
 
 describe("LabeledPercentageControl", () => {
   test("should default to empty", () => {
-    render(<LabeledPercentageControl onPercentageChange={() => { }} />);
+    render(<LabeledPercentageControl onPercentageChange={() => {}} />);
     const input = screen.getByLabelText("Percentage");
     expect(input).toHaveDisplayValue("");
   });
 
   test(`Given an error
         Then the error is displayed`, async () => {
-    render(<LabeledPercentageControl error='This is the error' onPercentageChange={() => { }} />);
+    render(
+      <LabeledPercentageControl
+        error="This is the error"
+        onPercentageChange={() => {}}
+      />
+    );
     expect(screen.getByText(/this is the error/i)).toBeInTheDocument();
-  })
+  });
 
   // TODO: min, max, required, whitespace/letters/invalid
   describe.each`

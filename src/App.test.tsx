@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
-import { UserEvent } from "@testing-library/user-event/dist/types/setup";
+import { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 
 describe.each`
   annualSalary    | moniesToInvest
